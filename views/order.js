@@ -104,6 +104,7 @@ async function handleSubmit(event) {
   const cart = JSON.parse(localStorage.getItem("cart") || "{}")
 
   // 4a. Skapa ordern. E-post och payment_id kommer från Stripe-sessionen.
+  // Se dina ordrar i webbläsaren: https://lager.emilfolino.se/v2/orders?api_key=DIN_NYCKEL (nyckeln står i models/auth.js)
   const newOrder = await orders.createOrder({
     name: `${formData.get("firstname")} ${formData.get("lastname")}`,
     address: formData.get("address"),
