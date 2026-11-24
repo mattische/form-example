@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="sv">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dåligt formulär (demo)</title>
+    <link rel="stylesheet" href="style/style.css" />
+</head>
+<body>
+    <main class="container">
+        <h2>Dåligt formulär: samma fält, fel gjort</h2>
+        <!-- Avsiktligt dåligt, för jämförelse med order.html. Skickar ingenting. -->
+        <form onsubmit="return false">
+            <input type="text" placeholder="Namn">
+            <input type="number" placeholder="Postnummer">
+            <input type="text" placeholder="Telefon">
+            <input type="text" placeholder="E-post">
+            <input type="text" placeholder="Ort">
+            <input type="submit">
+        </form>
+        <ul>
+            <li>Inga <code>label</code>: placeholdern försvinner när man skriver.</li>
+            <li><code>type="number"</code> på postnummer: "379 79" godkänns inte, nollor försvinner, scrollhjul ändrar värdet.</li>
+            <li>Ingen <code>type="email"</code> / <code>tel</code>: fel tangentbord på mobil, ingen validering.</li>
+            <li>Ingen <code>required</code>, <code>pattern</code> eller <code>autocomplete</code>.</li>
+            <li>Knappen säger bara "Skicka".</li>
+        </ul>
+    </main>
+</body>
+</html>

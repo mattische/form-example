@@ -1,0 +1,141 @@
+:root {
+  --text-color: #222;
+  --background-color: #fff;
+}
+
+body {
+  font-family: sans-serif;
+  color: var(--text-color);
+  background: var(--background-color);
+  margin: 0;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+
+.header a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  padding: 0 2rem 2rem;
+}
+
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  gap: 1.5rem;
+}
+
+.product img {
+  width: 100%;
+}
+
+.cart {
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.cart-content {
+  display: none;
+  position: fixed;
+  top: 1vh;
+  right: 0;
+  height: 98vh;
+  width: min(40rem, 100vw);
+  box-sizing: border-box;
+  background: var(--background-color);
+  padding: 1.75rem;
+  z-index: 1;
+  overflow-y: scroll;
+  border-top-left-radius: 1.75rem;
+  border-bottom-left-radius: 1.75rem;
+  box-shadow: -4px 4px 20px 0 rgba(0 0 0 / 75%);
+}
+
+.cart-content.active {
+  display: block;
+}
+
+body.cart-open {
+  overflow: hidden;
+}
+
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.close-cart {
+  cursor: pointer;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cart-item img {
+  width: 4rem;
+}
+
+.add-to-cart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--text-color);
+  color: var(--background-color);
+  border-radius: 50%;
+  font-size: 2rem;
+  width: 3ch;
+  height: 3ch;
+  cursor: pointer;
+}
+
+.input {
+  font-size: 1rem;
+  display: block;
+  border: 1px solid #767676;
+  border-radius: .2rem;
+  padding: .6rem;
+  width: 32rem;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 1rem;
+}
+
+.input:user-invalid {
+  border: 3px solid #b00020;
+  background: #fdecea;
+}
+
+.input:focus-visible {
+  outline: 3px solid #1a73e8;
+  outline-offset: 2px;
+}
+
+.button {
+  display: inline-block;
+  font-size: 1rem;
+  background: var(--text-color);
+  color: var(--background-color);
+  border: 0;
+  border-radius: .2rem;
+  padding: .6rem 1.2rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.order-form {
+  display: none;
+}
+
+.order-form.visible {
+  display: block;
+}
