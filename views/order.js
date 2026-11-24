@@ -7,7 +7,7 @@ import products from "../models/products.js"
 import orders from "../models/orders.js"
 import { clearCart } from "./cart.js"
 
-// Stripes PUBLIKA testnyckel. Den hemliga nyckeln finns i Lager-API:t (backend).
+// publik testnyckel från stripe. Den hemliga nyckeln finns i emils api och den får vi aldrig se.
 const stripe = Stripe('pk_test_51SQm4wL626KeakG07TkoOmFZOxD1rmmeWQb9pCO0dfEAuny10glrtIPS7cXD43ecMg5uS1ahzngx1zV4Md2F55dM00iLh6AzSO')
 
 // Svaret från session-status sparas här så att formuläret kommer åt e-post och payment_id
@@ -19,7 +19,7 @@ const orderForm = document.getElementById("order-form")
 
 // ---------- 1. Stripes betalformulär ----------
 
-// Gör om varukorgen i LocalStorage till det format Lager-API:t och Stripe vill ha
+// fixa så att lager-API:t och stripe blir glada
 async function buildItems() {
   const cart = JSON.parse(localStorage.getItem("cart") || "{}")
   let items = []
@@ -37,7 +37,7 @@ async function buildItems() {
         product_data: {
           name: productData.name
         },
-        unit_amount: 10000, // 100 kr. Stripe vill ha öre.
+        unit_amount: 10000, // 100 kr. stripe vill ha öre. coolt.
       },
       quantity: cart[product]
     })
@@ -47,12 +47,12 @@ async function buildItems() {
 }
 
 async function initializeCheckout() {
-  // Stripe anropar denna funktion för att få en "clientSecret" från vår backend
+  // stripe anropar denna funktion för att få en "clientSecret" från vår backend
   const fetchClientSecret = async () => {
     try {
       const data = {
         items: await buildItems(),
-        return_url: location.href, // dit Stripe skickar användaren efter betalning
+        return_url: location.href, // dit stripe skickar användaren efter betalning - till vår sida order.html i det här fallet
         api_key: auth.api_key,
       }
 
@@ -65,14 +65,14 @@ async function initializeCheckout() {
       })
       const result = await response.json()
 
-      // fetch kastar bara fel vid nätverksfel. Svar som 404 och 500 måste vi kontrollera själva.
+      // fetch kastar bara fel vid nätverksfel. 404 och 500 måste/bör vi ta hand om.
       if (!response.ok) {
         throw new Error(result.errors?.detail || "Okänt fel")
       }
 
       return result.clientSecret
     } catch (error) {
-      // Stripe sväljer felet, så vi visar det själva
+      // stripe "sväljer" felet, så vi visar det själva
       checkoutDiv.textContent =
         `Kunde inte starta betalningen: ${error.message}. Töm varukorgen och försök igen.`
       throw error
@@ -84,7 +84,7 @@ async function initializeCheckout() {
       fetchClientSecret,
     })
 
-    // Stripe ritar sitt formulär i #checkout
+    // stripes formulär i #checkout
     checkout.mount('#checkout')
   } catch (error) {
     checkoutDiv.textContent =

@@ -10,6 +10,7 @@
     <script src="views/cart.js" type="module" defer></script>
     <script src="views/order.js" type="module" defer></script>
 </head>
+
 <body class="site">
     <div class="cart-content" id="cart-content">
         <div class="cart-header">
@@ -28,11 +29,13 @@
         </nav>
         <div class="cart" id="cart">🛒 <span id="cart-count">0</span></div>
     </header>
+
+
     <main class="container">
         <div class="order-form-container">
             <h2>Kundinformation</h2>
 
-            <!-- Stripe monterar sitt betalformulär här (se views/order.js) -->
+            <!-- stripe mountar sitt betalformulär här (se views/order.js) -->
             <div class="checkout" id="checkout"></div>
 
             <!-- Vårt eget formulär. Det visas först när betalningen är klar. -->
