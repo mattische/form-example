@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Formulär</title>
+  <link rel="stylesheet" href="style/style.css" />
+  <script src="views/formular.js" type="module" defer></script>
+</head>
+<body>
+  <main class="container">
+    <h1>Formulär</h1>
+
+    <form id="form" class="visible">
+      <label for="firstname">Förnamn</label>
+      <input class="input" type="text" name="firstname" id="firstname" autocomplete="given-name" required>
+
+      <label for="lastname">Efternamn</label>
+      <input class="input" type="text" name="lastname" id="lastname" autocomplete="family-name" required>
+
+      <label for="email">E-post</label>
+      <input class="input" type="email" name="email" id="email" autocomplete="email" required>
+
+      <label for="phone">Telefon (0731234567 eller +46731234567)</label>
+      <input class="input" type="tel" name="phone" id="phone" pattern="(0|\+46)7[0236][0-9]{7}" autocomplete="tel" required>
+
+      <label for="zip">Postnummer (fem siffror, till exempel 379 79)</label>
+      <input class="input" type="text" name="zip" id="zip" inputmode="numeric" pattern="[0-9]{3} ?[0-9]{2}" autocomplete="postal-code" required>
+
+      <label for="password">Lösenord (minst 8 tecken, med bokstav, siffra och specialtecken !@#$%^&*)</label>
+      <input class="input" type="password" name="password" id="password" pattern="(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}" autocomplete="new-password" required>
+
+      <label for="age">Ålder (13 till 120)</label>
+      <input class="input" type="number" name="age" id="age" min="13" max="120" required>
+
+      <input type="submit" class="button" value="Skicka">
+    </form>
+
+    <h2>Data som skulle skickas</h2>
+    <pre id="output">Inget skickat än.</pre>
+  </main>
+</body>
+</html>

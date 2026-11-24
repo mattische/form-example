@@ -12,3 +12,10 @@ Flöde: order.js -> POST /stripe/create-checkout-session -> clientSecret -> Stri
 -> redirect med ?session_id -> GET /stripe/session-status -> POST /orders + /order_items.
 
 `order-dalig.html` är ett avsiktligt dåligt formulär att jämföra med formuläret i `order.html` (labels, input-typer, pattern, autocomplete).
+
+## Föreläsning
+
+- `slides/index.html`: slides (piltangenter för att bläddra), i samma stil som kursens slides.
+- `formular.html`: enkel formulärsida med regex-validering (telefon, postnummer, lösenord, ålder).
+- `order-dalig.html`: dåligt formulär att jämföra med.
+- `index.html`: den färdiga webshopen med Stripe.
