@@ -93,6 +93,7 @@ async function renderCartProducts() {
     for (let product in cart) {
       const productInfo = await products.fetchProduct(product)
 
+      //.thumbnail_url <-> image_url
       cartItems.push(`<div class="cart-item">
     <img src="${productInfo.image_url}" alt="Album art ${productInfo.name}" />
     <p>${productInfo.name}</p>
