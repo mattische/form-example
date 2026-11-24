@@ -165,3 +165,17 @@ body.cart-open {
   height: auto;
   margin-bottom: 1.5rem;
 }
+
+.cart-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.cart-controls button {
+  font-size: 1.2rem;
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+  cursor: pointer;
+}
