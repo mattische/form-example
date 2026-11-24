@@ -1,0 +1,91 @@
+/* forms.css: utseendet på formulär. Pseudoklasserna visar status utan JavaScript. */
+
+/* Gör formuläret synligt när betalningen är klar (JavaScript lägger till klassen "visible") */
+.order-form {
+  display: none;
+}
+
+.order-form.visible {
+  display: block;
+}
+
+/* Ett fält = etikett + inmatning + hjälptext */
+.field {
+  margin-bottom: 1.25rem;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+/* :has() + :required: sätt en stjärna efter etiketten om fältet är obligatoriskt */
+.field:has(:required) label::after {
+  content: " *";
+  color: #b00020;
+}
+
+.input {
+  font-size: 1rem;
+  display: block;
+  border: 1px solid #767676;
+  border-radius: 0.2rem;
+  padding: 0.6rem;
+  width: 32rem;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* ::placeholder: exempelvärdet i fältet. Det ersätter inte etiketten, för det försvinner när man skriver */
+.input::placeholder {
+  color: #767676;
+}
+
+/* :focus-visible: tydlig ram när man navigerar med tangentbordet */
+.input:focus-visible {
+  outline: 3px solid #1a73e8;
+  outline-offset: 2px;
+}
+
+/* :user-invalid: fel värde, men först när användaren har rört fältet (till skillnad från :invalid).
+   Tjockare ram och bakgrund, så att färgen inte är det enda tecknet */
+.input:user-invalid {
+  border: 3px solid #b00020;
+  background-color: #fdecea;
+}
+
+/* :user-valid: rätt värde */
+.input:user-valid {
+  border: 3px solid #1b7f3b;
+}
+
+/* :read-only: fältet går inte att ändra (e-post från Stripe) */
+.input:read-only {
+  background-color: #eee;
+}
+
+/* Hjälptexten ligger efter fältet. ~ väljer den, och den blir röd när fältet är fel */
+.hint {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.input:user-invalid ~ .hint {
+  color: #b00020;
+  font-weight: bold;
+}
+
+.button {
+  display: inline-block;
+  font-size: 1rem;
+  background-color: var(--text-color);
+  color: var(--background-color);
+  border: 0;
+  border-radius: 0.2rem;
+  padding: 0.6rem 1.2rem;
+  text-decoration: none;
+  cursor: pointer;
+}

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Formulär och betalning</title>
+  <title>Betalning och formulär</title>
 
   <link rel="stylesheet" href="style.css" />
   <script type="module" src="main.js" defer></script>
@@ -13,144 +13,87 @@
 
   <div id="slide-container" class="slide-container">
     <div class="slide">
-      <h1>Formulär och betalning</h1>
+      <h1>Betalning och formulär</h1>
       <p>jsux - kmom04</p>
     </div>
 
     <div class="slide">
       <h1>Agenda</h1>
-      <p>Ett dåligt formulär</p>
-      <p>Samma formulär, rätt gjort</p>
-      <p>Validering och reguljära uttryck</p>
-      <p>Från formulär till data</p>
+      <p>Resultatet</p>
       <p>Betalning med Stripe</p>
+      <p>Ett användarvänligt formulär</p>
+      <p>Från formulär till order</p>
+      <p>När det går fel</p>
     </div>
 
     <div class="slide fade-in">
-      <h1>Ett dåligt formulär</h1>
-      <p>Vad är fel här?</p>
-      <p><a href="../order-dalig.html">order-dalig.html</a></p>
+      <h1>Resultatet</h1>
+      <p>Varukorg → betalning → formulär → order</p>
+      <p><a href="../index.html">Webshopen</a></p>
+      <p>Testkort: <code>4242 4242 4242 4242</code>, datum <code>12/34</code>, valfri CVC</p>
     </div>
 
     <div class="slide fade-in">
-      <h1>Vad var fel?</h1>
-      <ul>
-        <li>Placeholder i stället för <code>label</code></li>
-        <li><code>type="number"</code> på postnummer</li>
-        <li>Fel <code>type</code> på e-post och telefon</li>
-        <li>Ingen <code>required</code>, <code>pattern</code> eller <code>autocomplete</code></li>
-        <li>Knappen säger bara "Skicka"</li>
-      </ul>
-    </div>
-
-    <div class="slide fade-in">
-      <h1>Rätt input-typ</h1>
-      <ul>
-        <li><code>email</code>, <code>tel</code>, <code>password</code>, <code>date</code></li>
-        <li><code>number</code> bara för tal man räknar med</li>
-        <li>Postnummer, telefon och kortnummer är <b>inte</b> tal</li>
-        <li><code>inputmode="numeric"</code> ger sifferknappar utan att bli ett tal</li>
-        <li><code>autocomplete</code> sparar tid för användaren</li>
-      </ul>
-      <p><a href="../formular.html">formular.html</a></p>
-    </div>
-
-    <div class="slide fade-in">
-      <h1>HTML-validering</h1>
-      <ul>
-        <li><code>required</code></li>
-        <li><code>minlength</code> / <code>maxlength</code></li>
-        <li><code>min</code> / <code>max</code> / <code>step</code></li>
-        <li><code>pattern</code> (reguljärt uttryck)</li>
-      </ul>
-      <p>Obs: <code>a@b</code> godkänns som e-post. Typen är tolerant.</p>
-    </div>
-
-    <div class="slide fade-in">
-      <h1>Reguljära uttryck</h1>
-      <p>Telefon: <code>07[0236][0-9]{7}</code></p>
-      <ul>
-        <li><code>07</code> början</li>
-        <li><code>[0236]</code> en av siffrorna 0, 2, 3 eller 6</li>
-        <li><code>[0-9]{7}</code> sju siffror till</li>
-      </ul>
-      <p>Med landskod: <code>(0|\+46)7[0236][0-9]{7}</code></p>
-      <p><a href="https://regex101.com/">regex101.com</a> · <a href="https://regexone.com/">regexone.com</a></p>
-    </div>
-
-    <div class="slide fade-in">
-      <h1>Fler mönster</h1>
-      <p>Postnummer: <code>[0-9]{3} ?[0-9]{2}</code></p>
-      <p>Ålder: <code>type="number" min="13" max="120"</code></p>
-      <p>Lösenord:<br><code>(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#$%^&amp;*]).{8,}</code></p>
-      <p><code>pattern</code> matchar hela värdet, så <code>^</code> och <code>$</code> behövs inte.</p>
-    </div>
-
-    <div class="slide fade-in">
-      <h1>Övning</h1>
-      <p>Skapa ett formulär med:</p>
-      <ul>
-        <li>Förnamn och efternamn (obligatoriska)</li>
-        <li>E-post (<code>type="email"</code>)</li>
-        <li>Telefon (07 + 0, 2, 3 eller 6 + sju siffror)</li>
-        <li>Lösenord (8 tecken, bokstav, siffra, specialtecken)</li>
-        <li>Ålder (13 till 120)</li>
-      </ul>
-      <p>Extra: landskod +46.</p>
-      <div data-time="15:00" class="timer"></div>
-    </div>
-
-    <div class="slide fade-in">
-      <h1>Visa felet tydligt</h1>
-      <ul>
-        <li><code>:user-invalid</code> (inte <code>:invalid</code>, som gäller direkt)</li>
-        <li>Förlita dig inte på färg: tjockare ram och bakgrund</li>
-        <li>Skriv formatet i synlig text vid fältet</li>
-        <li>Inte i <code>placeholder</code>, den försvinner</li>
-      </ul>
-    </div>
-
-    <div class="slide fade-in">
-      <h1>Från formulär till data</h1>
-      <ul>
-        <li><code>submit</code> + <code>event.preventDefault()</code></li>
-        <li><code>new FormData(form)</code></li>
-        <li><code>Object.fromEntries(...)</code> ger ett vanligt objekt</li>
-        <li>Lösenord ska aldrig visas eller loggas</li>
-      </ul>
-      <p>Prova i <a href="../formular.html">formular.html</a></p>
-    </div>
-
-    <div class="slide fade-in">
-      <h1>Validering i klienten är inte säkerhet</h1>
-      <p>Allt som körs i webbläsaren kan ändras av användaren.</p>
-      <p>Servern måste alltid validera också.</p>
-    </div>
-
-    <div class="slide fade-in">
-      <h1>Och så betalning...</h1>
-      <p>Ska vi ta emot kortnummer i vårt eget formulär?</p>
-      <p>Nej. Säkerhet, ansvar och regler (PCI).</p>
-      <p>Stripe tar över kortfälten.</p>
+      <h1>Varför ingen egen kortfält?</h1>
+      <p>Säkerhet, ansvar och regler (PCI).</p>
+      <p>Stripe tar över kortfälten. Vi kodar inte själva.</p>
+      <p>Betalningar kräver en server. Den ligger i Lager-API:t.</p>
     </div>
 
     <div class="slide fade-in">
       <h1>Flödet med Stripe</h1>
       <ul>
         <li>Klienten ber Lager-API:t skapa en <b>checkout-session</b></li>
-        <li>API:t (som har den hemliga nyckeln) svarar med <code>clientSecret</code></li>
-        <li>Stripe visar sitt formulär inbäddat på vår sida</li>
-        <li>Efter betalning kommer vi tillbaka med <code>?session_id=...</code></li>
+        <li>API:t svarar med <code>clientSecret</code></li>
+        <li>Stripe visar sitt formulär i <code>#checkout</code></li>
+        <li>Tillbaka med <code>?session_id=...</code></li>
         <li><code>session-status</code> ger e-post och <code>payment_id</code></li>
-        <li>Då visas vårt eget formulär och ordern skapas</li>
+        <li>Då visas vårt eget formulär</li>
       </ul>
     </div>
 
     <div class="slide fade-in">
-      <h1>Demo</h1>
-      <p><a href="../index.html">Webshopen</a></p>
-      <p>Testkort: <code>4242 4242 4242 4242</code></p>
-      <p>Valfritt datum i framtiden, valfri CVC.</p>
+      <h1>Stripes formulär är en förebild</h1>
+      <ul>
+        <li>Ett fält per rad, tydliga etiketter</li>
+        <li>Fel visas direkt vid fältet</li>
+        <li>Autofyll fungerar</li>
+        <li>Prova ett nekat kort: <code>4000 0000 0000 0002</code></li>
+      </ul>
+    </div>
+
+    <div class="slide fade-in">
+      <h1>Ett användarvänligt formulär</h1>
+      <ul>
+        <li>Synlig <code>label</code> vid varje fält</li>
+        <li>Rätt <code>type</code>: <code>email</code>, <code>tel</code>, <code>text</code></li>
+        <li><code>autocomplete</code> och <code>required</code></li>
+        <li><code>pattern</code> (reguljärt uttryck) för format</li>
+        <li><code>placeholder</code> bara som <b>exempel</b>, aldrig i stället för label</li>
+        <li>Hjälptext om formatet</li>
+      </ul>
+      <p><a href="../order-dalig.html">Jämför med ett dåligt formulär</a></p>
+    </div>
+
+    <div class="slide fade-in">
+      <h1>CSS-pseudoklasser</h1>
+      <ul>
+        <li><code>:user-invalid</code> / <code>:user-valid</code> (inte <code>:invalid</code>)</li>
+        <li><code>:focus-visible</code>, <code>:required</code>, <code>:read-only</code></li>
+        <li><code>::placeholder</code></li>
+        <li>Inte bara färg: tjockare ram och bakgrund</li>
+      </ul>
+      <p>Se <code>style/forms.css</code></p>
+    </div>
+
+    <div class="slide fade-in">
+      <h1>Från formulär till order</h1>
+      <ul>
+        <li><code>submit</code> + <code>event.preventDefault()</code></li>
+        <li><code>new FormData(form)</code> och <code>formData.get("...")</code></li>
+        <li><code>POST /orders</code> med e-post och <code>payment_id</code></li>
+        <li><code>readonly</code> följer med i FormData, <code>disabled</code> gör det inte</li>
+      </ul>
     </div>
 
     <div class="slide fade-in">
@@ -159,7 +102,7 @@
         <li><code>fetch</code> kastar bara fel vid nätverksfel</li>
         <li>Kontrollera <code>response.ok</code></li>
         <li><code>try/catch</code> och visa felet på sidan</li>
-        <li>Testa: ogiltigt <code>session_id</code>, tom varukorg, offline</li>
+        <li>Validering i klienten är inte säkerhet. Servern validerar också.</li>
       </ul>
     </div>
 

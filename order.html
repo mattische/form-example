@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>webshop</title>
     <link rel="stylesheet" href="style/style.css" />
+    <link rel="stylesheet" href="style/forms.css" />
     <script src="https://js.stripe.com/clover/stripe.js"></script>
     <script src="views/cart.js" type="module" defer></script>
     <script src="views/order.js" type="module" defer></script>
@@ -30,26 +31,73 @@
     <main class="container">
         <div class="order-form-container">
             <h2>Kundinformation</h2>
+
+            <!-- Stripe monterar sitt betalformulär här (se views/order.js) -->
             <div class="checkout" id="checkout"></div>
+
+            <!-- Vårt eget formulär. Det visas först när betalningen är klar. -->
+            <!-- Varje fält: label (synlig) + input + hjälptext. Placeholder är bara ett exempel. -->
             <form id="order-form" class="order-form">
-                <label for="firstname">Förnamn</label>
-                <input class="input" type="text" name="firstname" id="firstname" autocomplete="given-name" required>
+                <!-- label for="..." hör ihop med input id="..." -->
+                <!-- name används som nyckel i FormData. required = obligatoriskt. -->
+                <!-- autocomplete låter webbläsaren fylla i. aria-describedby kopplar hjälptexten för skärmläsare. -->
+                <div class="field">
+                    <label for="firstname">Förnamn</label>
+                    <input class="input" type="text" name="firstname" id="firstname"
+                           autocomplete="given-name" placeholder="t.ex. Anna" required aria-describedby="firstname-hint">
+                    <small class="hint" id="firstname-hint">Ditt förnamn</small>
+                </div>
 
-                <label for="address">Adress</label>
-                <input class="input" type="text" name="address" id="address" autocomplete="street-address" required>
+                <div class="field">
+                    <label for="lastname">Efternamn</label>
+                    <input class="input" type="text" name="lastname" id="lastname"
+                           autocomplete="family-name" placeholder="t.ex. Svensson" required aria-describedby="lastname-hint">
+                    <small class="hint" id="lastname-hint">Ditt efternamn</small>
+                </div>
 
-                <label for="zip">Postnummer (fem siffror, till exempel 379 79)</label>
-                <input class="input" type="text" name="zip" id="zip" inputmode="numeric" pattern="[0-9]{3} ?[0-9]{2}" autocomplete="postal-code" required>
+                <div class="field">
+                    <label for="address">Adress</label>
+                    <input class="input" type="text" name="address" id="address"
+                           autocomplete="street-address" placeholder="t.ex. Storgatan 1" required aria-describedby="address-hint">
+                    <small class="hint" id="address-hint">Gata och nummer</small>
+                </div>
 
-                <label for="city">Ort</label>
-                <input class="input" type="text" name="city" id="city" autocomplete="address-level2" required>
+                <!-- Postnummer är ingen siffra att räkna med, så type="text". -->
+                <!-- inputmode="numeric" ger sifferknappar på mobil. -->
+                <!-- pattern = reguljärt uttryck: tre siffror, valfritt mellanslag, två siffror. -->
+                <div class="field">
+                    <label for="zip">Postnummer</label>
+                    <input class="input" type="text" name="zip" id="zip" inputmode="numeric"
+                           pattern="[0-9]{3} ?[0-9]{2}" autocomplete="postal-code"
+                           placeholder="t.ex. 379 79" required aria-describedby="zip-hint">
+                    <small class="hint" id="zip-hint">Fem siffror, med eller utan mellanslag</small>
+                </div>
 
-                <label for="phone">Telefon (till exempel 0731234567)</label>
-                <input class="input" type="tel" name="phone" id="phone" pattern="07[0236][0-9]{7}" autocomplete="tel">
+                <div class="field">
+                    <label for="city">Ort</label>
+                    <input class="input" type="text" name="city" id="city"
+                           autocomplete="address-level2" placeholder="t.ex. Karlskrona" required aria-describedby="city-hint">
+                    <small class="hint" id="city-hint">Din ort</small>
+                </div>
 
-                <label for="email">E-post (hämtas från din betalning)</label>
-                <input class="input" type="email" readonly name="email" id="email">
+                <!-- type="tel" ger telefontangentbord. pattern: 07, en av 0/2/3/6, sedan sju siffror. -->
+                <div class="field">
+                    <label for="phone">Telefon</label>
+                    <input class="input" type="tel" name="phone" id="phone"
+                           pattern="07[0236][0-9]{7}" autocomplete="tel"
+                           placeholder="t.ex. 0731234567" required aria-describedby="phone-hint">
+                    <small class="hint" id="phone-hint">Svenskt mobilnummer, tio siffror utan mellanslag</small>
+                </div>
 
+                <!-- readonly: går inte att ändra men följer med i FormData (disabled gör det inte). -->
+                <!-- Webbläsaren validerar inte readonly-fält. E-posten kommer från Stripe. -->
+                <div class="field">
+                    <label for="email">E-post</label>
+                    <input class="input" type="email" name="email" id="email" readonly aria-describedby="email-hint">
+                    <small class="hint" id="email-hint">Hämtas från din betalning</small>
+                </div>
+
+                <!-- Webbläsaren kontrollerar fälten först. "submit" sker bara om allt är rätt. -->
                 <input type="submit" class="button" value="Skicka beställning">
             </form>
         </div>

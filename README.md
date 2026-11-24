@@ -1,21 +1,22 @@
-# Betalning med Stripe – exempel (JSUX kmom04)
+# Betalning och formulär - exempel (JSUX kmom04)
 
-Referensimplementation byggd enligt kursmaterialet (`kunskap/integrera_stripe` och `orderformular_for_webbshoppen`).
+Referensimplementation byggd enligt kursmaterialet
+([Integrera Stripe](https://dbwebb-jsux.github.io/kunskap/integrera_stripe/),
+[Orderformulär](https://dbwebb-jsux.github.io/kunskap/orderformular_for_webbshoppen/)).
 
-1. Hämta en API-nyckel: https://lager.emilfolino.se/v2/auth/api_key och lägg den i `models/auth.js`.
-2. Kopiera produkter (en gång): `curl -X POST https://lager.emilfolino.se/v2/copier/products -d "api_key=DIN NYCKEL"`
-3. Starta: `python -m http.server 8000` och öppna http://localhost:8000
-4. Lägg produkter i varukorgen, klicka Beställ, betala med testkort `4242 4242 4242 4242`, valfritt framtida datum, valfri CVC.
-5. Efter betalning: fyll i förnamn och skicka, så skapas ordern i Lager-API:t.
+Se `GUIDE.md` för ordning, tider och tips. Slides finns i `slides/index.html`.
 
-Flöde: order.js -> POST /stripe/create-checkout-session -> clientSecret -> Stripe Embedded Checkout
--> redirect med ?session_id -> GET /stripe/session-status -> POST /orders + /order_items.
+## Köra
 
-`order-dalig.html` är ett avsiktligt dåligt formulär att jämföra med formuläret i `order.html` (labels, input-typer, pattern, autocomplete).
+1. Lägg din API-nyckel i `models/auth.js` (https://lager.emilfolino.se/v2/auth/api_key).
+2. Kopiera produkter, en gång: `curl -X POST https://lager.emilfolino.se/v2/copier/products -d "api_key=DIN NYCKEL"`
+3. `npx http-server . -p 8000` och öppna http://localhost:8000
+4. Lägg produkter i varukorgen, klicka Beställ, betala med testkortet `4242 4242 4242 4242`, datum `12/34`, valfri CVC.
+5. Fyll i formuläret och skicka. Ordern skapas i Lager-API:t.
 
-## Föreläsning
+## Filer
 
-- `slides/index.html`: slides (piltangenter för att bläddra), i samma stil som kursens slides.
-- `formular.html`: enkel formulärsida med regex-validering (telefon, postnummer, lösenord, ålder).
-- `order-dalig.html`: dåligt formulär att jämföra med.
-- `index.html`: den färdiga webshopen med Stripe.
+- `index.html`, `views/main.js`, `views/cart.js`: webshop och varukorg
+- `order.html`, `views/order.js`: Stripe-betalning och beställningsformulär
+- `style/forms.css`: formulärstil med pseudoklasser
+- `order-dalig.html`: ett avsiktligt dåligt formulär att jämföra med
