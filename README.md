@@ -4,7 +4,7 @@ Referensimplementation byggd enligt kursmaterialet
 ([Integrera Stripe](https://dbwebb-jsux.github.io/kunskap/integrera_stripe/),
 [Orderformulär](https://dbwebb-jsux.github.io/kunskap/orderformular_for_webbshoppen/)).
 
-Se `GUIDE.md` för ordning, tider och tips. Slides finns i `slides/index.html`.
+Se `GUIDE.md` för ordning, tider och tips, och `HALLBARHET.md` för hållbarhet och energi. Slides finns i `slides/index.html`.
 
 ## Köra
 
