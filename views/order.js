@@ -19,6 +19,10 @@ async function buildItems() {
   for (let product in cart) {
     const productData = await products.fetchProduct(product)
 
+    if (!productData) {
+      throw new Error(`Produkt ${product} finns inte i lagret`)
+    }
+
     items.push({
       price_data: {
         currency: 'sek',
@@ -36,29 +40,45 @@ async function buildItems() {
 
 async function initializeCheckout() {
   const fetchClientSecret = async () => {
-    const data = {
-      items: await buildItems(),
-      return_url: location.href,
-      api_key: auth.api_key,
+    try {
+      const data = {
+        items: await buildItems(),
+        return_url: location.href,
+        api_key: auth.api_key,
+      }
+
+      const response = await fetch(`${auth.api_url}/stripe/create-checkout-session`, {
+        body: JSON.stringify(data),
+        headers: {
+          'content-type': 'application/json'
+        },
+        method: "POST",
+      })
+      const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.errors?.detail || "Okänt fel")
+      }
+
+      return result.clientSecret
+    } catch (error) {
+      // Stripe sväljer felet, så vi visar det själva
+      checkoutDiv.textContent =
+        `Kunde inte starta betalningen: ${error.message}. Töm varukorgen och försök igen.`
+      throw error
     }
-
-    const response = await fetch(`${auth.api_url}/stripe/create-checkout-session`, {
-      body: JSON.stringify(data),
-      headers: {
-        'content-type': 'application/json'
-      },
-      method: "POST",
-    })
-    const { clientSecret } = await response.json()
-
-    return clientSecret
   }
 
-  const checkout = await stripe.initEmbeddedCheckout({
-    fetchClientSecret,
-  })
+  try {
+    const checkout = await stripe.initEmbeddedCheckout({
+      fetchClientSecret,
+    })
 
-  checkout.mount('#checkout')
+    checkout.mount('#checkout')
+  } catch (error) {
+    checkoutDiv.textContent =
+      `Kunde inte starta betalningen: ${error.message}. Töm varukorgen och försök igen.`
+  }
 }
 
 async function handleSubmit(event) {
