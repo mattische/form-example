@@ -131,10 +131,6 @@ pre code {
     color: #ff6b6b;
 }
 
-.demo-link:focus-visible {
-    outline: 3px solid orange;
-}
-
 .demo-link:active {
     color: #5fd068;
 }
