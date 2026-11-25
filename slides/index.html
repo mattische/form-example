@@ -77,46 +77,40 @@ a:active { color: green; }</code></pre>
     </div>
 
     <div class="slide fade-in">
-      <h1>Exempel: fokus, skrivskydd och mer</h1>
+      <h1>några till exempel: fokus, read-only</h1>
       <ul>
         <li><code>:focus-visible</code>: gäller när elementet har fokus och webbläsaren anser att fokus ska synas, till exempel när man tabbar dit</li>
         <li><code>:read-only</code>: gäller ett fält som användaren inte kan ändra, det vill säga med attributet <code>readonly</code> (e-postfältet från Stripe)</li>
         <li><code>::placeholder</code>: väljer exempeltexten i ett tomt fält. Den finns så länge fältet är tomt och försvinner när man skriver</li>
-        <li><code>.field:has(:required)</code>: gäller ett <code>.field</code> som innehåller ett obligatoriskt fält. <code>label::after</code> lägger då till en stjärna efter etiketten</li>
-      </ul>
-      <p>Koden: <code>style/forms.css</code>. Se <a href="../order.html">order.html</a> och <a href="../order-dalig.html">order-dalig.html</a></p>
+        </ul>
     </div>
 
     <div class="slide fade-in">
-      <h1>Stripe: testa och nycklar</h1>
+      <h1>Stripe: lite tips/fakt från dokumentationen</h1>
       <ul>
-        <li>Testkort som lyckas: <code>4242 4242 4242 4242</code></li>
-        <li>Testkort som nekas: <code>4000 0000 0000 0002</code></li>
-        <li>Datum i framtiden (<code>12/34</code>), valfri CVC</li>
-        <li>Fler testkort: <code>docs.stripe.com/testing</code>. Prova själv först</li>
-        <li>Publika nyckeln <code>pk_test_...</code> är inte hemlig. Den hemliga ligger i backend</li>
-        <li>Testläge fungerar över <code>http://localhost</code>. Live kräver https</li>
+        <li>Det finns ett testkort som alltid lyckas: <code>4242 4242 4242 4242</code></li>
+        <li>Och ett som alltid nekas: <code>4000 0000 0000 0002</code></li>
+        <li>Ange alltid datum i framtiden (t ex <code>12/34</code>), valfri CVC funkar</li>
+        <li>Fler testkort finns här: <code>docs.stripe.com/testing</code>. T ex för Visa, Mastercard, länder etc</li>
+        <li>Finns en publika test-nyckel som man kan prova med <code>pk_test_...</code></li>
+        <li>Ibland syns inte formuläret: Ctrl + Shift +R, eller titta i dev tools <code>#checkout</code></li>
+        <li>http funkar, dvs ingen kryptering <code>http://localhost</code>. stripes andra konton (betalda) kräver https</li>
       </ul>
-    </div>
 
-    <div class="slide fade-in">
-      <h1>Stripe och JavaScript: tips</h1>
-      <ul>
-        <li><code>type="module"</code> krävs för <code>import</code> och <code>await</code> utanför en funktion</li>
-        <li><code>fetch</code> kastar bara fel vid nätverksfel. Kontrollera <code>response.ok</code></li>
-        <li><code>console.log(session)</code> visar vad Stripe skickar tillbaka</li>
-        <li>DevTools, fliken Network: <code>create-checkout-session</code> och <code>session-status</code></li>
-      </ul>
-    </div>
-
-    <div class="slide fade-in">
-      <h1>Stripe: felsökning</h1>
+      <!--
       <ul>
         <li><code>localStorage</code> delas per adress och port. Rensa: <code>localStorage.removeItem("cart")</code></li>
         <li>Hård omladdning: Ctrl+Shift+R</li>
         <li>Syns inte formuläret: titta i konsolen och i <code>#checkout</code></li>
         <li>Nycklar hör hemma i backend eller miljövariabler i riktiga projekt</li>
       </ul>
+      -->
+    </div>
+
+
+    <div class="slide fade-in">
+      <h1>Hållbarhet</h1>
+
     </div>
 
     <div class="slide fade-in">
