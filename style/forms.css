@@ -73,7 +73,7 @@ label {
   background-color: #eee;
 }
 
-/* hjälptexten efter fältet. ~ väljer den, och den blir röd när fältet är fel */
+/* hjälptexten efter fältet */
 .hint {
   display: block;
   margin-top: 0.25rem;
@@ -81,6 +81,10 @@ label {
   color: #555;
 }
 
+/* ~ är "general sibling combinator" (syskonväljare): väljer .hint som är syskon till .input,
+  alltså har samma förälder och kommer EFTER fältet i HTML:en. Funkar bara framåt, inte bakåt.
+  Här: när fältet är :user-invalid blir hjälptexten röd och fet. Utan JavaScript.
+  (+ väljer bara syskonet precis efter, ~ väljer alla efterföljande syskon.) */
 .input:user-invalid ~ .hint {
   color: #b00020;
   font-weight: bold;
