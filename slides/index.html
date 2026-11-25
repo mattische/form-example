@@ -13,30 +13,30 @@
 
   <div id="slide-container" class="slide-container">
     <div class="slide">
-      <h1>Betalning och formulär</h1>
-      <p>jsux - kmom04</p>
+      <h1>Orderformulär</h1>
+      <p>och hållbarhet</p>
     </div>
 
     <div class="slide">
       <h1>Agenda</h1>
       <p>Pseudoklasser</p>
-      <p>Orderformulär och Stripe</p>
+      <p>Orderformuläret</p>
       <p>Hållbarhet</p>
     </div>
 
     <div class="slide fade-in">
-      <h1>Pseudoklasser: vad är det?</h1>
+      <h1>Pseudoklasser och element</h1>
       <ul>
-        <li>Ett <b>tillstånd</b> hos ett element: fokus, ogiltigt, skrivskyddat ...</li>
+        <li>Ett <b>"tillstånd"</b> hos ett element, t ex focus, valid, read-only, hover m.fl</li>
         <li>Skrivs med ett kolon: <code>selector:tillstånd { ... }</code></li>
-        <li>Ändras av användaren eller webbläsaren, inte av vår HTML</li>
-        <li>Gör att vi slipper JavaScript för att växla klasser</li>
+        <li>"Aktivceras" av användaren eller webbläsaren, inte av vår HTML</li>
+        <li>css för att växla mellan klasser</li>
         <li>Pseudo<b>element</b> har två kolon: <code>::placeholder</code>, <code>::after</code></li>
       </ul>
     </div>
 
     <div class="slide fade-in">
-      <h1>Första exemplet: länkar</h1>
+      <h1>Exemplet med länkar, a</h1>
       <pre><code>a { color: blue; }
 a:hover { color: red; }
 a:visited { color: purple; }
@@ -46,47 +46,46 @@ a:active { color: green; }</code></pre>
     </div>
 
     <div class="slide fade-in">
-      <h1>Vanliga pseudoklasser</h1>
+      <h1>Några exempel på pseudoklasser</h1>
       <ul>
-        <li><code>:hover</code>, <code>:focus-visible</code>: musen och tangentbordet</li>
-        <li><code>:required</code>, <code>:read-only</code>: egenskaper hos fältet</li>
+        <li><code>:hover</code>, <code>:focus-visible</code>: aktiveras av muspekar och/eller tangentbordet</li>
+        <li><code>:required</code>, <code>:read-only</code>: är egenskaper hos fältet</li>
         <li><code>:user-invalid</code> / <code>:user-valid</code>: efter att användaren fyllt i</li>
-        <li><code>:has()</code>: välj en förälder utifrån vad den innehåller</li>
-        <li><code>:first-child</code>, <code>:nth-child()</code>: position bland syskon</li>
+        <li><code>:first-child</code>, <code>:nth-child()</code>: position bland siblings/syskon</li>
       </ul>
     </div>
 
     <div class="slide fade-in">
       <h1>Pseudoelement</h1>
-      <p>Pseudoklass = ett <b>tillstånd</b> (<code>:hover</code>). Pseudoelement = en <b>del</b> av ett element (<code>::after</code>).</p>
-      <pre><code>.ny::after { content: " NYTT!"; }</code></pre>
-      <p>HTML: <code>&lt;span class="ny"&gt;Ny skiva&lt;/span&gt;</code> ger <span class="ny">Ny skiva</span></p>
-      <p>Texten finns inte i HTML:en. CSS lägger till den.</p>
+      <p>Pseudoklass = är ett <b>"tillstånd"</b> t ex <code>:hover</code>.
+          <br />Pseudoelement = är "en del" av ett element t e x <code>::after</code>.</p>
+      <pre><code>.newRecord::after { content: " NY SKIVA!"; }</code></pre>
+      <p>html: <code>&lt;span class="ny"&gt;Ny skiva&lt;/span&gt;</code> ger <span class="newRecord">Ny skiva</span></p>
+      <p>Texten finns alltså inte skriven i html-koden.
+          <br />css lägger till den.</p>
     </div>
 
     <div class="slide fade-in">
-      <h1>Exempel: validering</h1>
+      <h1>Exempel pseudoklasser för validering av formulär</h1>
       <ul>
-        <li><code>.input:user-invalid</code>: gäller när användaren fyllt i ett fält med ogiltigt värde, och lämnat det</li>
-        <li><code>.input:user-valid</code>: gäller när användaren fyllt i ett giltigt värde</li>
-        <li><code>:user-invalid</code> i stället för <code>:invalid</code>, som gäller redan när sidan laddas, innan användaren gjort något</li>
+        <li><code>.input:user-invalid</code>: när användaren fyllt i ett fält med ogiltigt värde (och lämnat det)</li>
+        <li><code>.input:user-valid</code>: när användaren fyllt i ett giltigt värde</li>
         <li><code>.input:user-invalid ~ .hint</code>: väljer hjälptexten efter ett ogiltigt fält</li>
-        <li>I vårt exempel visas det med ram, bakgrund och text, inte bara färg</li>
       </ul>
-      <p>Prova postnummer <code>3797</code> och sedan <code>379 79</code></p>
+      <p>Finns också t ex <code>:invalid, :valid</code> som till skillnad från prefixet<code>:user-</code>"aktiveras" invalid direkt, dvs innan användaren gjort något</p>
     </div>
 
     <div class="slide fade-in">
-      <h1>några till exempel: fokus, read-only</h1>
+      <h1>några till exempel för formulär: focus, read-only</h1>
       <ul>
-        <li><code>:focus-visible</code>: gäller när elementet har fokus och webbläsaren anser att fokus ska synas, till exempel när man tabbar dit</li>
-        <li><code>:read-only</code>: gäller ett fält som användaren inte kan ändra, det vill säga med attributet <code>readonly</code> (e-postfältet från Stripe)</li>
-        <li><code>::placeholder</code>: väljer exempeltexten i ett tomt fält. Den finns så länge fältet är tomt och försvinner när man skriver</li>
+        <li><code>:focus-visible</code>: när elementet har/får fokus till exempel när man tabbar dit</li>
+        <li><code>:read-only</code>: användaren kan inte ändra. Anväönd attributet <code>readonly</code></li>
+        <li><code>::placeholder</code>: exempeltexten i ett tomt fält. Placeholder finns så länge fältet är tomt och försvinner när man skriver</li>
         </ul>
     </div>
 
     <div class="slide fade-in">
-      <h1>Stripe: lite tips/fakt från dokumentationen</h1>
+      <h1>Angående Stripe: lite tips/fakta från dokumentationen</h1>
       <ul>
         <li>Det finns ett testkort som alltid lyckas: <code>4242 4242 4242 4242</code></li>
         <li>Och ett som alltid nekas: <code>4000 0000 0000 0002</code></li>
@@ -121,7 +120,7 @@ a:active { color: green; }</code></pre>
         <li>Pihkola m.fl. (2018): mindre energi per GB, men mer användning. <b>Rebound-effekt</b></li>
         <li>Vår webshop: 12 miniatyrer ≈ 0,5 MB mot 12 fullstora bilder ≈ 28,6 MB (ca 58 gånger)</li>
         <li><code>stripe.js</code> ≈ 324 kB mot vår egen kod ≈ 22 kB. Säkerhet kostar vikt</li>
-        <li>Du påverkar: rätt bildstorlek, <code>loading="lazy"</code>, färre anrop, färre beroenden</li>
+        <li>VI KAN PÅVERKA: tex med bildstorlekar, färre anrop till externa tjänster/bibliotek, använda färre moduler/paket</li>
       </ul>
     </div>
 
@@ -132,7 +131,7 @@ a:active { color: green; }</code></pre>
         <li>Enligt Google (2025): en median Gemini-fråga ≈ 0,24 Wh, 0,03 g CO2e och 0,26 mL vatten</li>
         <li>Mäter inte: träning, hårdvarutillverkning, nätverk, din enhet. Företagets egen mätning</li>
         <li>Billigare per fråga, men fler frågor. Samma rebound som ovan</li>
-        <li>Du påverkar: kalla inte AI vid varje tangenttryck, korta prompts, återanvänd svar, behövs AI alls?</li>
+        <li>VI KAN PÅVERKA: kalla inte AI vid varje tangenttryck, korta prompts, återanvänd svar, behövs AI alls?</li>
       </ul>
     </div>
 
