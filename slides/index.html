@@ -19,90 +19,108 @@
 
     <div class="slide">
       <h1>Agenda</h1>
-      <p>Resultatet</p>
-      <p>Betalning med Stripe</p>
-      <p>Ett användarvänligt formulär</p>
-      <p>Från formulär till order</p>
-      <p>När det går fel</p>
+      <p>Pseudoklasser i CSS</p>
+      <p>Tips om Stripe och betalning</p>
+      <p>Hållbarhet på webben och AI</p>
     </div>
 
     <div class="slide fade-in">
-      <h1>Resultatet</h1>
-      <p>Varukorg → betalning → formulär → order</p>
-      <p><a href="../index.html">Webshopen</a></p>
-      <p>Testkort: <code>4242 4242 4242 4242</code>, datum <code>12/34</code>, valfri CVC</p>
-    </div>
-
-    <div class="slide fade-in">
-      <h1>Varför ingen egen kortfält?</h1>
-      <p>Säkerhet, ansvar och regler (PCI).</p>
-      <p>Stripe tar över kortfälten. Vi kodar inte själva.</p>
-      <p>Betalningar kräver en server. Den ligger i Lager-API:t.</p>
-    </div>
-
-    <div class="slide fade-in">
-      <h1>Flödet med Stripe</h1>
+      <h1>Pseudoklasser: vad är det?</h1>
       <ul>
-        <li>Klienten ber Lager-API:t skapa en <b>checkout-session</b></li>
-        <li>API:t svarar med <code>clientSecret</code></li>
-        <li>Stripe visar sitt formulär i <code>#checkout</code></li>
-        <li>Tillbaka med <code>?session_id=...</code></li>
-        <li><code>session-status</code> ger e-post och <code>payment_id</code></li>
-        <li>Då visas vårt eget formulär</li>
+        <li>Ett <b>tillstånd</b> hos ett element: fokus, ogiltigt, skrivskyddat ...</li>
+        <li>Skrivs med ett kolon: <code>selector:tillstånd { ... }</code></li>
+        <li>Ändras av användaren eller webbläsaren, inte av vår HTML</li>
+        <li>Gör att vi slipper JavaScript för att växla klasser</li>
+        <li>Pseudo<b>element</b> har två kolon: <code>::placeholder</code>, <code>::after</code></li>
       </ul>
     </div>
 
     <div class="slide fade-in">
-      <h1>Stripes formulär är en förebild</h1>
+      <h1>Vanliga pseudoklasser</h1>
       <ul>
-        <li>Ett fält per rad, tydliga etiketter</li>
-        <li>Fel visas direkt vid fältet</li>
-        <li>Autofyll fungerar</li>
-        <li>Prova ett nekat kort: <code>4000 0000 0000 0002</code></li>
+        <li><code>:hover</code>, <code>:focus-visible</code>: musen och tangentbordet</li>
+        <li><code>:required</code>, <code>:read-only</code>: egenskaper hos fältet</li>
+        <li><code>:user-invalid</code> / <code>:user-valid</code>: efter att användaren fyllt i</li>
+        <li><code>:has()</code>: välj en förälder utifrån vad den innehåller</li>
+        <li><code>:first-child</code>, <code>:nth-child()</code>: position bland syskon</li>
       </ul>
     </div>
 
     <div class="slide fade-in">
-      <h1>Ett användarvänligt formulär</h1>
+      <h1>Exempel: validering</h1>
       <ul>
-        <li>Synlig <code>label</code> vid varje fält</li>
-        <li>Rätt <code>type</code>: <code>email</code>, <code>tel</code>, <code>text</code></li>
-        <li><code>autocomplete</code> och <code>required</code></li>
-        <li><code>pattern</code> (reguljärt uttryck) för format</li>
-        <li><code>placeholder</code> bara som <b>exempel</b>, aldrig i stället för label</li>
-        <li>Hjälptext om formatet</li>
+        <li><code>.input:user-invalid</code>: röd ram och rosa bakgrund</li>
+        <li><code>.input:user-valid</code>: grön ram</li>
+        <li><code>:user-invalid</code> i stället för <code>:invalid</code>, annars är fälten röda redan när sidan laddas</li>
+        <li><code>.input:user-invalid ~ .hint</code>: hjälptexten blir röd när fältet är fel</li>
+        <li>Inte bara färg: tjockare ram och bakgrund också</li>
       </ul>
-      <p><a href="../order-dalig.html">Jämför med ett dåligt formulär</a></p>
+      <p>Prova postnummer <code>3797</code> och sedan <code>379 79</code></p>
     </div>
 
     <div class="slide fade-in">
-      <h1>CSS-pseudoklasser</h1>
+      <h1>Exempel: fokus, skrivskydd och mer</h1>
       <ul>
-        <li><code>:user-invalid</code> / <code>:user-valid</code> (inte <code>:invalid</code>)</li>
-        <li><code>:focus-visible</code>, <code>:required</code>, <code>:read-only</code></li>
-        <li><code>::placeholder</code></li>
-        <li>Inte bara färg: tjockare ram och bakgrund</li>
+        <li><code>:focus-visible</code>: tydlig ram när man tabbar</li>
+        <li><code>:read-only</code>: grå bakgrund på e-postfältet från Stripe</li>
+        <li><code>::placeholder</code>: exempelvärdet, försvinner när man skriver</li>
+        <li><code>.field:has(:required) label::after</code>: stjärna efter obligatoriska fält</li>
       </ul>
-      <p>Se <code>style/forms.css</code></p>
+      <p>Koden: <code>style/forms.css</code>. Se <a href="../order.html">order.html</a> och <a href="../order-dalig.html">order-dalig.html</a></p>
     </div>
 
     <div class="slide fade-in">
-      <h1>Från formulär till order</h1>
+      <h1>Stripe: testa och nycklar</h1>
       <ul>
-        <li><code>submit</code> + <code>event.preventDefault()</code></li>
-        <li><code>new FormData(form)</code> och <code>formData.get("...")</code></li>
-        <li><code>POST /orders</code> med e-post och <code>payment_id</code></li>
-        <li><code>readonly</code> följer med i FormData, <code>disabled</code> gör det inte</li>
+        <li>Testkort som lyckas: <code>4242 4242 4242 4242</code></li>
+        <li>Testkort som nekas: <code>4000 0000 0000 0002</code></li>
+        <li>Datum i framtiden (<code>12/34</code>), valfri CVC</li>
+        <li>Fler testkort: <code>docs.stripe.com/testing</code>. Prova själv först</li>
+        <li>Publika nyckeln <code>pk_test_...</code> är inte hemlig. Den hemliga ligger i backend</li>
+        <li>Testläge fungerar över <code>http://localhost</code>. Live kräver https</li>
       </ul>
     </div>
 
     <div class="slide fade-in">
-      <h1>När det går fel</h1>
+      <h1>Stripe och JavaScript: tips</h1>
       <ul>
-        <li><code>fetch</code> kastar bara fel vid nätverksfel</li>
-        <li>Kontrollera <code>response.ok</code></li>
-        <li><code>try/catch</code> och visa felet på sidan</li>
-        <li>Validering i klienten är inte säkerhet. Servern validerar också.</li>
+        <li><code>type="module"</code> krävs för <code>import</code> och <code>await</code> utanför en funktion</li>
+        <li><code>fetch</code> kastar bara fel vid nätverksfel. Kontrollera <code>response.ok</code></li>
+        <li><code>console.log(session)</code> visar vad Stripe skickar tillbaka</li>
+        <li>DevTools, fliken Network: <code>create-checkout-session</code> och <code>session-status</code></li>
+      </ul>
+    </div>
+
+    <div class="slide fade-in">
+      <h1>Stripe: felsökning</h1>
+      <ul>
+        <li><code>localStorage</code> delas per adress och port. Rensa: <code>localStorage.removeItem("cart")</code></li>
+        <li>Hård omladdning: Ctrl+Shift+R</li>
+        <li>Syns inte formuläret: titta i konsolen och i <code>#checkout</code></li>
+        <li>Nycklar hör hemma i backend eller miljövariabler i riktiga projekt</li>
+      </ul>
+    </div>
+
+    <div class="slide fade-in">
+      <h1>Hållbarhet på webben</h1>
+      <ul>
+        <li>Danny van Kooten (2020): 1 kB mindre i en fil på 2 miljoner sajter ≈ <b>2950 kg CO2 per månad</b></li>
+        <li>Räkning: 0,5 kWh/GB × 0,295 kg CO2/kWh. Grov uppskattning, poängen är resonemanget</li>
+        <li>Pihkola m.fl. (2018): mindre energi per GB, men mer användning. <b>Rebound-effekt</b></li>
+        <li>Vår webshop: 12 miniatyrer ≈ 0,5 MB mot 12 fullstora bilder ≈ 28,6 MB (ca 58 gånger)</li>
+        <li><code>stripe.js</code> ≈ 324 kB mot vår egen kod ≈ 22 kB. Säkerhet kostar vikt</li>
+        <li>Du påverkar: rätt bildstorlek, <code>loading="lazy"</code>, färre anrop, färre beroenden</li>
+      </ul>
+    </div>
+
+    <div class="slide fade-in">
+      <h1>AI, datacenter och hållbarhet</h1>
+      <ul>
+        <li>Enligt IEA (2025): datacenter ca 1,5 % av världens el 2024 (415 TWh), väntas mer än dubblas till 2030</li>
+        <li>Enligt Google (2025): en median Gemini-fråga ≈ 0,24 Wh, 0,03 g CO2e och 0,26 mL vatten</li>
+        <li>Mäter inte: träning, hårdvarutillverkning, nätverk, din enhet. Företagets egen mätning</li>
+        <li>Billigare per fråga, men fler frågor. Samma rebound som ovan</li>
+        <li>Du påverkar: kalla inte AI vid varje tangenttryck, korta prompts, återanvänd svar, behövs AI alls?</li>
       </ul>
     </div>
 

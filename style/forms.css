@@ -1,6 +1,6 @@
-/* forms.css: utseendet på formulär. Pseudoklasserna visar status utan JavaScript. */
+/* för formuläret order.html - pseudoklasser */
 
-/* Gör formuläret synligt när betalningen är klar (JavaScript lägger till klassen "visible") */
+/* formuläret synligt när betalningen är klar (JavaScript lägger till klassen "visible") */
 .order-form {
   display: none;
 }
@@ -37,35 +37,35 @@ label {
   box-sizing: border-box;
 }
 
-/* ::placeholder: exempelvärdet i fältet. Det ersätter inte etiketten, för det försvinner när man skriver */
+/* ::placeholder: exempelvärdet/placeholder i fältet. försvinner när man skriver */
 .input::placeholder {
   color: #767676;
 }
 
-/* :focus-visible: tydlig ram när man navigerar med tangentbordet */
+/* :focus-visible: visa en ram när elementet få fokus */
 .input:focus-visible {
   outline: 3px solid #1a73e8;
   outline-offset: 2px;
 }
 
-/* :user-invalid: fel värde, men först när användaren har rört fältet (till skillnad från :invalid).
-   Tjockare ram och bakgrund, så att färgen inte är det enda tecknet */
+/* :user-invalid: om fel värde, när användaren har "akriverar" elementet (till skillnad från :invalid).
+  ram och bakgrund lite tjovkare  */
 .input:user-invalid {
   border: 3px solid #b00020;
   background-color: #fdecea;
 }
 
-/* :user-valid: rätt värde */
+/* :user-valid: om rätt värde */
 .input:user-valid {
   border: 3px solid #1b7f3b;
 }
 
-/* :read-only: fältet går inte att ändra (e-post från Stripe) */
+/* :read-only: fältet read-only/skrivskyddat/går inte att ändra (e-post från Stripe) */
 .input:read-only {
   background-color: #eee;
 }
 
-/* Hjälptexten ligger efter fältet. ~ väljer den, och den blir röd när fältet är fel */
+/* hjälptexten efter fältet. ~ väljer den, och den blir röd när fältet är fel */
 .hint {
   display: block;
   margin-top: 0.25rem;
@@ -78,6 +78,7 @@ label {
   font-weight: bold;
 }
 
+/* ja, en knapp */
 .button {
   display: inline-block;
   font-size: 1rem;
