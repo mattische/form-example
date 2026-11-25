@@ -48,8 +48,16 @@ label {
   outline-offset: 2px;
 }
 
-/* :user-invalid: om fel värde, när användaren har "akriverar" elementet (till skillnad från :invalid).
-  ram och bakgrund lite tjovkare  */
+/* Vad aktiverar :user-invalid och :user-valid?
+  1. Webbläsarens validering avgör giltigt eller ogiltigt, utifrån fältets attribut:
+     required (får inte vara tomt), type="email"/"url"/"number" (rätt format),
+     pattern (reguljärt uttryck, bara för textliknande typer), minlength/maxlength, min/max/step.
+     Bryts någon av reglerna är fältet ogiltigt. Reguljärt uttryck är alltså bara en av flera regler.
+  2. Användaren måste ha interagerat med fältet: ändrat värdet och lämnat fältet, eller försökt skicka formuläret.
+     Därför är fälten inte röda när sidan laddas (till skillnad från :invalid). */
+
+/* :user-invalid: om fel värde, när användaren har "aktiverat" elementet (till skillnad från :invalid).
+  ram och bakgrund lite tjockare  */
 .input:user-invalid {
   border: 3px solid #b00020;
   background-color: #fdecea;
