@@ -135,11 +135,7 @@ pre code {
     color: #5fd068;
 }
 
-.pris::before {
-    content: "Nu: ";
-}
-
-.pris::after {
-    content: " kr";
+.ny::after {
+    content: " NYTT!";
     color: #5fd068;
 }
