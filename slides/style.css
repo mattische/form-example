@@ -138,3 +138,12 @@ pre code {
 .demo-link:active {
     color: #5fd068;
 }
+
+.pris::before {
+    content: "Nu: ";
+}
+
+.pris::after {
+    content: " kr";
+    color: #5fd068;
+}

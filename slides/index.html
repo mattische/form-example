@@ -58,6 +58,16 @@ a:active { color: green; }</code></pre>
     </div>
 
     <div class="slide fade-in">
+      <h1>Pseudoelement</h1>
+      <p>Pseudoklass = ett <b>tillstånd</b> (<code>:hover</code>). Pseudoelement = en <b>del</b> av ett element (<code>::after</code>).</p>
+      <pre><code>.pris::before { content: "Nu: "; }
+.pris::after  { content: " kr"; color: #5fd068; }
+p::first-letter { font-size: 2em; }</code></pre>
+      <p>HTML: <code>&lt;span class="pris"&gt;199&lt;/span&gt;</code> ger <span class="pris">199</span></p>
+      <p>Texten finns inte i HTML:en. CSS lägger till den. Kräver <code>content</code>.</p>
+    </div>
+
+    <div class="slide fade-in">
       <h1>Exempel: validering</h1>
       <ul>
         <li><code>.input:user-invalid</code>: röd ram och rosa bakgrund</li>
