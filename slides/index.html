@@ -67,11 +67,11 @@ a:active { color: green; }</code></pre>
     <div class="slide fade-in">
       <h1>Exempel: validering</h1>
       <ul>
-        <li><code>.input:user-invalid</code>: röd ram och rosa bakgrund</li>
-        <li><code>.input:user-valid</code>: grön ram</li>
-        <li><code>:user-invalid</code> i stället för <code>:invalid</code>, annars är fälten röda redan när sidan laddas</li>
-        <li><code>.input:user-invalid ~ .hint</code>: hjälptexten blir röd när fältet är fel</li>
-        <li>Inte bara färg: tjockare ram och bakgrund också</li>
+        <li><code>.input:user-invalid</code>: gäller när användaren fyllt i ett fält med ogiltigt värde, och lämnat det</li>
+        <li><code>.input:user-valid</code>: gäller när användaren fyllt i ett giltigt värde</li>
+        <li><code>:user-invalid</code> i stället för <code>:invalid</code>, som gäller redan när sidan laddas, innan användaren gjort något</li>
+        <li><code>.input:user-invalid ~ .hint</code>: väljer hjälptexten efter ett ogiltigt fält</li>
+        <li>I vårt exempel visas det med ram, bakgrund och text, inte bara färg</li>
       </ul>
       <p>Prova postnummer <code>3797</code> och sedan <code>379 79</code></p>
     </div>
