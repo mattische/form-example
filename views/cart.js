@@ -95,7 +95,7 @@ async function renderCartProducts() {
 
       //.thumbnail_url <-> image_url
       cartItems.push(`<div class="cart-item">
-    <img src="${productInfo.image_url}" alt="Album art ${productInfo.name}" />
+    <img src="${productInfo.thumbnail_url} " alt="Album art ${ productInfo.name } " />
     <p>${productInfo.name}</p>
     <div class="cart-controls" data-product-id="${product}">
       <button type="button" data-action="dec" aria-label="Minska antal ${productInfo.name}">−</button>
