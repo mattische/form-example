@@ -79,10 +79,10 @@ a:active { color: green; }</code></pre>
     <div class="slide fade-in">
       <h1>Exempel: fokus, skrivskydd och mer</h1>
       <ul>
-        <li><code>:focus-visible</code>: tydlig ram när man tabbar</li>
-        <li><code>:read-only</code>: grå bakgrund på e-postfältet från Stripe</li>
-        <li><code>::placeholder</code>: exempelvärdet, försvinner när man skriver</li>
-        <li><code>.field:has(:required) label::after</code>: stjärna efter obligatoriska fält</li>
+        <li><code>:focus-visible</code>: gäller när elementet har fokus och webbläsaren anser att fokus ska synas, till exempel när man tabbar dit</li>
+        <li><code>:read-only</code>: gäller ett fält som användaren inte kan ändra, det vill säga med attributet <code>readonly</code> (e-postfältet från Stripe)</li>
+        <li><code>::placeholder</code>: väljer exempeltexten i ett tomt fält. Den finns så länge fältet är tomt och försvinner när man skriver</li>
+        <li><code>.field:has(:required)</code>: gäller ett <code>.field</code> som innehåller ett obligatoriskt fält. <code>label::after</code> lägger då till en stjärna efter etiketten</li>
       </ul>
       <p>Koden: <code>style/forms.css</code>. Se <a href="../order.html">order.html</a> och <a href="../order-dalig.html">order-dalig.html</a></p>
     </div>
