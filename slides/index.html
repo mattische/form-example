@@ -19,9 +19,9 @@
 
     <div class="slide">
       <h1>Agenda</h1>
-      <p>Pseudoklasser i CSS</p>
-      <p>Tips om Stripe och betalning</p>
-      <p>Hållbarhet på webben och AI</p>
+      <p>Pseudoklasser</p>
+      <p>Orderformulär och Stripe</p>
+      <p>Hållbarhet</p>
     </div>
 
     <div class="slide fade-in">
@@ -33,6 +33,17 @@
         <li>Gör att vi slipper JavaScript för att växla klasser</li>
         <li>Pseudo<b>element</b> har två kolon: <code>::placeholder</code>, <code>::after</code></li>
       </ul>
+    </div>
+
+    <div class="slide fade-in">
+      <h1>Första exemplet: länkar</h1>
+      <pre><code>a { color: blue; }
+a:hover { color: red; }
+a:visited { color: purple; }
+a:focus-visible { outline: 3px solid orange; }
+a:active { color: green; }</code></pre>
+      <p>Prova: <a href="#" class="demo-link" onclick="return false">håll musen här, tabba hit, klicka</a></p>
+      <p>Samma element, olika utseende beroende på tillstånd.</p>
     </div>
 
     <div class="slide fade-in">
